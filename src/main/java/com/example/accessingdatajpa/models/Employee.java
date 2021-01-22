@@ -6,15 +6,16 @@ import javax.persistence.*;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO, generator = "employee_generator")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "employee_generator")
     private Long id;
     private String firstName;
     private String lastName;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     Job job;
 
-    protected Employee() {}
+    protected Employee() {
+    }
 
     public Employee(String firstName, String lastName) {
         this.firstName = firstName;
@@ -32,22 +33,19 @@ public class Employee {
     public String getLastName() {
         return lastName;
     }
-//
-//    public Job getJob() {
-//        return job;
-//    }
 
     public void setJob(Job job) {
-        if (this.job != null) {
-            this.job.removeEmployee(this);
-        }
         this.job = job;
+    }
+
+    public Job getJob() {
+        return job;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Customer[id=%d, firstName='%s', lastName='%s']",
+                "Employee[id=%d, firstName='%s', lastName='%s']",
                 id, firstName, lastName);
     }
 }

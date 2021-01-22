@@ -9,5 +9,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     List<Employee> findByLastName(String lastName);
 
+    List<Employee> findByJobId(long id);
+
     Employee findById(long id);
 }

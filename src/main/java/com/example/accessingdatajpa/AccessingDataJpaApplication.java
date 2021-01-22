@@ -14,53 +14,46 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class AccessingDataJpaApplication {
 
-	private static final Logger log = LoggerFactory.getLogger(AccessingDataJpaApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(AccessingDataJpaApplication.class);
 
-	public static void main(String[] args) {
-		SpringApplication.run(AccessingDataJpaApplication.class);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(AccessingDataJpaApplication.class);
+    }
 
-	@Bean
-	public CommandLineRunner demo(JobRepository jRepository, EmployeeRepository eRepository) {
-		return (args) -> {
+    @Bean
+    public CommandLineRunner demo(JobRepository jRepository, EmployeeRepository eRepository) {
+        return (args) -> {
 
-			Employee jared = new Employee("Jared", "Larsen");
-			Employee jen = new Employee("Jen", "Parker");
-			Employee jj = new Employee("JJ", "Parker");
-			Employee bob = new Employee("Bob", "Larsen");
+            Employee jared = new Employee("Jared", "Larsen");
+            Employee jen = new Employee("Jen", "Parker");
+//			Employee jj = new Employee("JJ", "Parker");
+//			Employee bob = new Employee("Bob", "Larsen");
+//
+            Job fisherman = new Job("Fisherman", "Florida");
+            Job plumber = new Job("Plumber", "Boise");
+//			Job welder = new Job("Welder", "Los Angeles");
+//			Job hunter = new Job("Hunter", "Alaska");
 
-
-			Job fisherman = new Job("Fisherman", "Florida");
-			Job plumber = new Job("Plumber", "Boise");
-			Job welder = new Job("Welder", "Los Angeles");
-			Job hunter = new Job("Hunter", "Alaska");
-
-
-
-			fisherman.addEmployee(jared);
-			fisherman.addEmployee(jen);
-
-			plumber.addEmployee(jj);
-			plumber.addEmployee(bob);
-
-			welder.addEmployee(bob);
-			hunter.addEmployee(jared);
-
-			fisherman.addEmployee(jared);
-
-			jRepository.save(fisherman);
-			jRepository.save(plumber);
-			jRepository.save(welder);
-			jRepository.save(hunter);
-
-			eRepository.save(jared);
-			eRepository.save(jen);
-			eRepository.save(jj);
-			eRepository.save(bob);
-
-
-
-		};
-	}
-
+            jared.setJob(fisherman);
+//			fisherman.addEmployee(jen);
+//
+//			plumber.addEmployee(jj);
+//			plumber.addEmployee(bob);
+//
+//			welder.addEmployee(bob);
+//			hunter.addEmployee(jared);
+//
+//			fisherman.addEmployee(jared);
+//
+//			jRepository.save(fisherman);
+            jRepository.save(plumber);
+//			jRepository.save(welder);
+//			jRepository.save(hunter);
+//
+            eRepository.save(jared);
+            eRepository.save(jen);
+//			eRepository.save(jj);
+//			eRepository.save(bob);
+        };
+    }
 }

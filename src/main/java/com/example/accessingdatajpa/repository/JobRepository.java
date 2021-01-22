@@ -10,5 +10,4 @@ public interface JobRepository extends JpaRepository<Job, Long> {
     List<Job> findByLocation(String location);
 
     Job findByName(String name);
-
 }

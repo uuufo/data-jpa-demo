@@ -8,9 +8,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(value=JobException.class)
+    @ExceptionHandler(value = JobException.class)
     protected ResponseEntity<ErrorResponse> handleJobException(JobException ex) {
-        ResponseEntity<ErrorResponse> response = new ResponseEntity<ErrorResponse>(new ErrorResponse(ex.getMessage()), HttpStatus.NOT_FOUND);
-        return response;
+        return new ResponseEntity<ErrorResponse>(new ErrorResponse(ex.getMessage()), ex.getStatus());
+    }
+
+    @ExceptionHandler(value = EmployeeException.class)
+    protected ResponseEntity<ErrorResponse> handleEmployeeException(EmployeeException ex) {
+        return new ResponseEntity<ErrorResponse>(new ErrorResponse(ex.getMessage()), HttpStatus.NOT_FOUND);
     }
 }
